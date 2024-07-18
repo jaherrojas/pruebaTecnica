@@ -64,6 +64,11 @@ public class BasePage {
     public void clickElementId(String locator){
         FindById(locator).click();
     }
+
+    public void write(String locator, String keysToSend){
+        FindByXpath(locator).clear();
+        FindByXpath(locator).sendKeys(keysToSend);
+    }
     
     
 }
