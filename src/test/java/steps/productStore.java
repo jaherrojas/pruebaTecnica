@@ -12,9 +12,11 @@ public class productStore {
         main.navegarAProductStore();
     }
 
-    @When("El usuario hace click en sign up")
+    @When("El usuario hace click en sign up e ingresa credenciales")
     public void clickSignUp(){
-        main.hacerClickSignUp();
+        main.hacerRegistro();
     }
+
+    
     
 }
