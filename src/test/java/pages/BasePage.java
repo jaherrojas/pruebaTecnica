@@ -7,22 +7,31 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BasePage {
-    /*
-     * Declaración de una variable estática 'driver' de tipo WebDriver
-     * Esta variable va a ser compartida por todas las instancias de BasePage y sus subclases
-     */
     protected static WebDriver driver;
-    /*
-     * Declaración de una variable de instancia 'wait' de tipo WebDriverWait.
-     * Se inicializa inmediatamente con una instancia dew WebDriverWait utilizando el 'driver' estático
-     * WebDriverWait se usa para poner esperas explícitas en los elementos web
-     */
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    protected WebDriverWait wait;
+
+    // Constructor que acepta el nombre del navegador
+    public BasePage(String browser) {
+        switch (browser.toLowerCase()) {
+            case "chrome":
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+                break;
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported browser: " + browser);
+        }
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
  
     /* 
      * Configura el WebDriver para Chrome usando WebDriverManager.

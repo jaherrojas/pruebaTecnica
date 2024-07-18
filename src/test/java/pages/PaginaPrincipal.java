@@ -1,39 +1,36 @@
 package pages;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import com.github.javafaker.Faker;
-
 
 public class PaginaPrincipal extends BasePage {
 
     private String signUpObject = "//a[contains(.,'Sign up')]";
     private String userNameObject = "sign-username";
     private String passwordObject = "sign-password";
-    private String AfterSignUp = "//button[contains(.,'Sign up')]";
+    private String afterSignUp = "//button[contains(.,'Sign up')]";
 
     private Faker faker;
-    
-    public PaginaPrincipal(){
-        super(driver);
+
+    public PaginaPrincipal(String browser) {
+        super(browser); // Llama al constructor de la clase base con el navegador seleccionado
         this.faker = new Faker();
     }
-    
-    //Metodo para navegar a pagina Product Store
-    public void navegarAProductStore(){
+
+    // Método para navegar a la página Product Store
+    public void navegarAProductStore() {
         navigateTo("https://www.demoblaze.com/");
     }
 
-    // Metodo para clickear en el registro
+    // Método para hacer clic en el botón Sign up
     public void hacerClick() {
         clickElementXpath(signUpObject);
     }
 
-    public void ingresarCredenciales(){
+    // Método para ingresar credenciales aleatorias
+    public void ingresarCredenciales() {
         try {
-            // Espera 2 segundos después de hacer clic
-            Thread.sleep(2000);
+            Thread.sleep(2000); // Espera 2 segundos después de hacer clic
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -47,19 +44,17 @@ public class PaginaPrincipal extends BasePage {
         write(passwordObject, randomPassword);
     }
 
-    //Finalizar registro.
-    public void clickSignUp(){
-        clickElementXpath(AfterSignUp);
+    // Método para hacer clic en el botón Sign up después de ingresar credenciales
+    public void clickSignUp() {
+        clickElementXpath(afterSignUp);
     }
 
-    // Método para manejar la alerta y obtener el texto de la alerta
+    // Método para obtener el texto de la alerta y aceptarla
     public String getAlertText() {
-        return super.getAlertText();  // Llama al método de la clase base
+        return super.getAlertText(); // Llama al método de la clase base
     }
 
-    // Método para aceptar la alerta
     public void acceptAlert() {
-        super.acceptAlert();  // Llama al método de la clase base
+        super.acceptAlert(); // Llama al método de la clase base
     }
-    
 }
