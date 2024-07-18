@@ -7,10 +7,11 @@ import pages.PaginaPrincipal;
 
 public class productStore {
 
-    PaginaPrincipal main = new PaginaPrincipal("chrome"); // Cambiar a "firefox" para Firefox
+    PaginaPrincipal main;
 
     @Given("que el usuario esta en la pagina principal de Product Store")
-    public void irAProdcutStore(){
+    public void irAProdcutStore() {
+        main = new PaginaPrincipal("chrome"); // Cambiar a "firefox" para Firefox
         main.navegarAProductStore();
     }
 

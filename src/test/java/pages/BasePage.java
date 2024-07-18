@@ -33,17 +33,6 @@ public class BasePage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
  
-    /* 
-     * Configura el WebDriver para Chrome usando WebDriverManager.
-     * WebDriverManager va a estar descargando y configurando automáticamente el driver del navegador
-    */
-    static {
-        WebDriverManager.chromedriver().setup();
- 
-        //Inicializa la variable estática 'driver' con una instancia de ChromeDriver
-        driver = new ChromeDriver();
-    }
- 
     /*
      * Este es el constructor de BasePage que acepta un objeto WebDriver como argumento.
      */
