@@ -1,9 +1,12 @@
 package pages;
 
 import java.time.Duration;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -44,6 +47,22 @@ public class BasePage {
 
     public static void closeBrowser(){
         driver.quit();
+    }
+
+    private WebElement FindByXpath(String locator){
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
+    }
+
+    private WebElement FindById(String locator){
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.id(locator)));
+    }
+
+    public void clickElementXpath(String locator){
+        FindByXpath(locator).click();
+    }
+
+    public void clickElementId(String locator){
+        FindById(locator).click();
     }
     
     
