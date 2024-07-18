@@ -1,5 +1,7 @@
 package steps;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import io.cucumber.java.en.*;
 import pages.PaginaPrincipal;
 
@@ -25,12 +27,12 @@ public class productStore {
     @Then("el sistema muestra el mensaje Registro exitoso")
     public void finalizarRegistro(){
         main.clickSignUp();
+
+        // Obtener el texto de la alerta y aceptarla
+        String alertText = main.getAlertText();
+        System.out.println("Texto de la alerta: " + alertText);
+        // Asegurarse de que el texto de la alerta es "Sign up successful."
+        assertEquals("Sign up successful.", alertText);
+        main.acceptAlert();
     }
-
-    
-
-    
-
-    
-    
 }

@@ -2,6 +2,7 @@ package pages;
 
 import java.time.Duration;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -68,6 +69,16 @@ public class BasePage {
     public void write(String locator, String keysToSend){
         FindById(locator).sendKeys(keysToSend);
     }
-    
-    
+
+    // Método para cambiar el foco a la alerta y obtener el texto
+    public String getAlertText() {
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        return alert.getText();
+    }
+
+    // Método para aceptar la alerta
+    public void acceptAlert() {
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        alert.accept();
+    }
 }

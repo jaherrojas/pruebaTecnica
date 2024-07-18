@@ -1,5 +1,8 @@
 package pages;
 
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import com.github.javafaker.Faker;
 
 
@@ -48,4 +51,15 @@ public class PaginaPrincipal extends BasePage {
     public void clickSignUp(){
         clickElementXpath(AfterSignUp);
     }
+
+    // Método para manejar la alerta y obtener el texto de la alerta
+    public String getAlertText() {
+        return super.getAlertText();  // Llama al método de la clase base
+    }
+
+    // Método para aceptar la alerta
+    public void acceptAlert() {
+        super.acceptAlert();  // Llama al método de la clase base
+    }
+    
 }
