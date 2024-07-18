@@ -1,6 +1,8 @@
 Feature: Registro de nuevos usuarios en la pagina Product Store
 
 Scenario: Registrar un nuevo usuario exitosamente
-    Given El usuario esta en la pagina www.demoblaze.com
-    When El usuario hace click en sign up e ingresa credenciales  
-    # Then El sistema muestra un mensaje de confirmación de registro
+    Given que el usuario esta en la pagina principal de Product Store
+    When el usuario hace clic en Sign Up
+    And el usuario ingresa sus credenciales
+    Then el sistema muestra el mensaje Registro exitoso
+      

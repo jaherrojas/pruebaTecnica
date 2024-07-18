@@ -7,15 +7,29 @@ public class productStore {
 
     PaginaPrincipal main = new PaginaPrincipal();
 
-    @Given("El usuario esta en la pagina www.demoblaze.com")
+    @Given("que el usuario esta en la pagina principal de Product Store")
     public void irAProdcutStore(){
         main.navegarAProductStore();
     }
 
-    @When("El usuario hace click en sign up e ingresa credenciales")
+    @When("el usuario hace clic en Sign Up")
     public void clickSignUp(){
-        main.hacerRegistro();
+        main.hacerClick();
     }
+
+    @And("el usuario ingresa sus credenciales")
+    public void registroCredenciales(){
+        main.ingresarCredenciales();
+    }
+
+    @Then("el sistema muestra el mensaje Registro exitoso")
+    public void finalizarRegistro(){
+        main.clickSignUp();
+    }
+
+    
+
+    
 
     
     
