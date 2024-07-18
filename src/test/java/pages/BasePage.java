@@ -38,6 +38,10 @@ public class BasePage {
         BasePage.driver = driver;
     }
 
+    public static void navigateTo(String url){
+        driver.get(url);
+    }
+
     public static void closeBrowser(){
         driver.quit();
     }
