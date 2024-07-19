@@ -5,42 +5,17 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.Serenity;
 
-public class BasePage extends PageObject {
+public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-    // Constructor que inicializa el WebDriver según la configuración del navegador
+    // Constructor que inicializa el WebDriver proporcionado por Serenity
     public BasePage() {
-        String browser = System.getProperty("webdriver.driver", "firefox"); // Obtén el navegador de las propiedades
-
-        switch (browser.toLowerCase()) {
-            case "chrome":
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-                break;
-            case "firefox":
-                WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
-                break;
-            default:
-                throw new IllegalArgumentException("Unsupported browser: " + browser);
-        }
-
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
-
-    /*
-     * Constructor que acepta un objeto WebDriver como argumento.
-     */
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
+        this.driver = Serenity.getWebdriverManager().getWebdriver();
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
@@ -49,7 +24,9 @@ public class BasePage extends PageObject {
     }
 
     public void closeBrowser() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit(); // Asegúrate de cerrar el navegador si es necesario
+        }
     }
 
     protected WebElement findByXpath(String locator) {
