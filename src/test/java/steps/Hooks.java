@@ -24,17 +24,17 @@ public class Hooks {
         System.setProperty("serenity.results.directory", resultsDirectory);
     }
 
-    @After
-    public void afterScenario(Scenario scenario) {
-        WebDriver driver = Serenity.getDriver();
-        if (scenario.isFailed()) {
-            final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", "Screenshot of the error");
-        }
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+    // @After
+    // public void afterScenario(Scenario scenario) {
+    //     WebDriver driver = Serenity.getDriver();
+    //     if (scenario.isFailed()) {
+    //         final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    //         scenario.attach(screenshot, "image/png", "Screenshot of the error");
+    //     }
+    //     if (driver != null) {
+    //         driver.quit();
+    //     }
+    // }
 
     public String getTimestamp() {
         return timestamp;

@@ -50,10 +50,10 @@ public class productStore extends ScenarioSteps {
         main.seleccionarProducto(producto);
     }
 
-    @And("el usuario añade el producto al carrito")
+    @Then("el usuario agrega el producto al carrito")
     public void clickAddToCart() {
         main.clickAddToCart();
+        main.acceptAlert();
     }
-
 
 }

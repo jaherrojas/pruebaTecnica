@@ -78,15 +78,17 @@ public class PaginaPrincipal extends BasePage {
     public void seleccionarProducto(String producto) {
         pauseForSeconds(1); // Pausa de 2 segundos antes de interactuar
         clickElementXpath(String.format("//a[contains(text(),'%s')]", producto));
-        pauseForSeconds(2); // Pausa de 2 segundos antes de interactuar
+
     }
 
     public void clickAddToCart() {
-        pauseForSeconds(7); 
         WebElement addToCartElement = findByXpath(addToCart);
         wait.until(ExpectedConditions.elementToBeClickable(addToCartElement));
         addToCartElement.click();
+        pauseForSeconds(3);
     }
+
+
     
 }
 

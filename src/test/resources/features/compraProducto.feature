@@ -5,7 +5,7 @@ Feature: Realizar una compra en Product Store
         Given que el usuario esta en la pagina principal de Product Store
         When el usuario selecciona la categoria "<categoria>"
         And el usuario elige el producto "<producto>"
-        And el usuario añade el producto al carrito
+        Then el usuario agrega el producto al carrito
 
         Examples:
 
