@@ -53,7 +53,27 @@ public class productStore extends ScenarioSteps {
     @Then("el usuario agrega el producto al carrito")
     public void clickAddToCart() {
         main.clickAddToCart();
+    }
+
+    @And("el usuario acepta la aletar y genera un click en el tab Cart")
+    public void clickTabCart() {
+        // Obtener el texto de la alerta y aceptarla
+        String alertText = main.getAlertText();
+        System.out.println("Texto de la alerta: " + alertText);
+        // Asegurarse de que el texto de la alerta es "Sign up successful."
+        assertEquals("Product added", alertText);
         main.acceptAlert();
+        main.clickTabCart();
+    }
+
+    @Then("hace click en place older")
+    public void clickPlaceOrder(){
+        main.clickPlaceOrder();
+    }
+
+    @And("diligencia formulario")
+    public void diligenciaOrden(){
+        main.ingresarCredencialesOrder();
     }
 
 }

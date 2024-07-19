@@ -49,6 +49,8 @@ public class BasePage {
         findById(locator).sendKeys(keysToSend);
     }
 
+    
+
     // Método para cambiar el foco a la alerta y obtener el texto
     public String getAlertText() {
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());

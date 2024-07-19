@@ -6,6 +6,12 @@ Feature: Realizar una compra en Product Store
         When el usuario selecciona la categoria "<categoria>"
         And el usuario elige el producto "<producto>"
         Then el usuario agrega el producto al carrito
+        And el usuario acepta la aletar y genera un click en el tab Cart
+        Then hace click en place older
+        And diligencia formulario
+
+        #And ingresa al apartado del Cart
+        #Then el usuario genera click en place Order
 
         Examples:
 
