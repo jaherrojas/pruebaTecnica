@@ -1,6 +1,6 @@
 Feature: Registro de nuevos usuarios en la página Product Store
 
-  @Caso1
+  @Registro
   Scenario: Registrar un nuevo usuario exitosamente
     Given que el usuario esta en la pagina principal de Product Store
     When el usuario hace clic en Sign Up

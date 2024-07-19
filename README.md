@@ -5,7 +5,7 @@ Este proyecto contiene pruebas automatizadas utilizando Selenium, Cucumber, Sere
 
 ## Authors
 
-- [@Jaher Rojas](https://github.com/jaherrojas)
+- [@Jaher Rojas](https://github.com/jaherrojas/pruebaTecnica)
 
 
 
@@ -45,7 +45,8 @@ Este proyecto contiene pruebas automatizadas utilizando Selenium, Cucumber, Sere
 **Características clave:**
 - Captura de capturas de pantalla durante la ejecución de las pruebas.
 - Organización de pruebas en historias y tareas.
-- Fácil integración con herramientas de CI/CD.
+
+
 
 ### Selenium
 
@@ -72,8 +73,6 @@ loginButton.click();
 
 ```
 
-
-
 ## Requisitos
 
 Asegúrate de tener instalados los siguientes programas en tu máquina:
@@ -88,18 +87,67 @@ Asegúrate de tener instalados los siguientes programas en tu máquina:
 
    ```bash
    git clone https://github.com/tuusuario/tu-repositorio.git
-
    ```
+
+2. Este proyecto usa JDK 17 y Gradle 8.9 
+
+   ```bash
+   https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+
+   https://gradle.org/next-steps/?version=8.9&format=bin
+   ```
+
+3. Variables de entorno 
+
+   ```bash
+   Crear una variable de entorno con nombre de : JAVA_HOME 
+   Darle ala variable la ruta del JDK : C:\Users\Usuario\Downloads\jdk-17.0.7_windows-x64_bin\jdk-17.0.7
+   ```
+
+  ```bash
+  En la ruta de PATH para Gradle : C:\Users\Esteban\Desktop\gradle-8.9-bin\gradle-8.9\bin
+  windows-x64_bin\jdk-17.0.7\bin
+  ``` 
+  ```bash
+  En la ruta de PATH para JDK: C:\Users\usuario\Downloads\jdk-17.7_windows-x64_bin\jdk-17.0.7\bin
+  ``` 
+
+
+4. Extensiones nescesarias para el correcto Funcionamiento en el Editor de Visual studio Code
+ 
+- Live server
+- Cucumber
+- Debugger for Java
+- Extension pack
+- Gradle for Java
+- Gradle language support
+- LiveServer
+
+5. Como ejecutar las pruebas dentro del proyecto
+
+```
+Adentro de la terminarl dentro del proyecto : cd pruebaTecnica
+```
+```
+Una vez dentro del proyecto ejecutar el siguiente comando :  ./gradlew test
+
+Para visualizar el reporte de serenity clic en la ruta que tira la termina la cual es: file:///C:/Users/jaher/Desktop/pruebaTecnica/target/site/serenity/index.html
+
+Luego ejecutamos el index.html con el liveServer
+```
+
+
 ## Estructura de proyecto
 
+- `src/test/java/resources/features`: Contiene los archivos de características (features) de Cucumber.
+- `src/test/java/pages`: Contiene las clases que implementan el patrón Page Object Model (POM) con la lógica y los métodos para interactuar con las páginas web.
+- `src/test/java/runner`: Contiene las clases que configuran la ejecución de pruebas y generación de reportes.
+- `serenity.properties`: Archivo de configuración de Serenity. En este archivo ajustamos el navegador con el que queremos ejecutar.
 
+## Como seleccionar navegador para la ejecución
 
-- `src/test/java/resources/features`: Contiene las clases de prueba y los runners.
-- `src/test/java/pages`: Contiene los archivos con la lógica y los métodos.
-- `src/test/java/runner`: Contiene la configuración de los reportes generados.
-- `serenity.properties`: Archivo de configuración de Serenity.
-
-
+- `serenity.properties`: webdriver.driver = chrome **Puedes cambiarlo por "firefox".**
+ 
 
 ## Dependencias
 
@@ -108,34 +156,44 @@ Este proyecto utiliza Serenity BDD, JUnit y Cucumber para pruebas automatizadas.
 ```gradle
 plugins {
     id 'java'
-    id 'maven'
+    id 'application'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '3.9.7'
 }
 
 repositories {
     mavenCentral()
 }
 
+// Definir la versión de Serenity como una variable
+ext {
+    serenityVersion = '4.1.20'
+}
+
 dependencies {
-   // Testing frameworks
+    // Testing frameworks
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
-    testImplementation 'org.testng:testng:7.10.2'
 
     // Selenium
     implementation 'org.seleniumhq.selenium:selenium-java:4.22.0'
-    implementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.22.0'
-    implementation 'org.seleniumhq.selenium:selenium-firefox-driver:4.22.0'
     implementation 'io.github.bonigarcia:webdrivermanager:5.9.1'
 
     // Cucumber
     implementation 'io.cucumber:cucumber-java:7.18.0'
     testImplementation 'io.cucumber:cucumber-junit:7.18.0'
 
-    // Serenity dependencies
-    testImplementation "net.serenity-bdd:serenity-core:4.1.20"
-    testImplementation "net.serenity-bdd:serenity-junit:4.1.20"
-    testImplementation "net.serenity-bdd:serenity-cucumber:4.1.20"
+   // Serenity dependencies usando la variable de versión
+    testImplementation "net.serenity-bdd:serenity-core:$serenityVersion"
+    testImplementation "net.serenity-bdd:serenity-junit:$serenityVersion"
+    testImplementation "net.serenity-bdd:serenity-cucumber:$serenityVersion"
 
     // Additional dependencies
-    implementation 'com.github.javafaker:javafaker:1.0.2'   
+    implementation 'com.github.javafaker:javafaker:1.0.2'
+
+    task cleanReports(type: Delete) {
+    delete fileTree(dir: 'target/serenity-reports', include: '**/*')
 }
+
+test.dependsOn cleanReports
+}
+
 ```

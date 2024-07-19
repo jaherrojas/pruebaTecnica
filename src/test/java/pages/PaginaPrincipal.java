@@ -7,18 +7,16 @@ import java.util.concurrent.TimeUnit;
 
 public class PaginaPrincipal extends BasePage {
 
-    // Caso 1
+    // Localizadores de elementos para registro y compra
     private String signUpObject = "//a[contains(.,'Sign up')]";
     private String userNameObject = "sign-username";
     private String passwordObject = "sign-password";
     private String afterSignUp = "//button[contains(.,'Sign up')]";
 
-    // Caso 2
     private String addToCart = "//a[@href='#'][contains(.,'Add to cart')]";
     private String tabCart = "//a[@href='cart.html']";
     private String orden = "//button[@type='button'][contains(.,'Place Order')]";
 
-    // deligenciamiento orden de compra
     private String userNameOrder = "(//input[contains(@type,'text')])[4]";
     private String countryOrder = "//input[@id='country']";
     private String cityOrder = "//input[@id='city']";
@@ -26,95 +24,95 @@ public class PaginaPrincipal extends BasePage {
     private String monthOrder = "//input[@id='month']";
     private String yearOrder = "//input[@id='year']";
 
-    // Botón de compra
     private String purchase = "//button[contains(.,'Purchase')]";
 
     private Faker faker;
 
     public PaginaPrincipal() {
-        super(); // Usar el constructor de la clase base sin parámetros
-        this.faker = new Faker();
+        super(); // Inicializa el WebDriver y WebDriverWait
+        this.faker = new Faker(); // Inicializa Faker para generar datos aleatorios
     }
 
     private void pauseForSeconds(int seconds) {
         try {
-            TimeUnit.SECONDS.sleep(seconds);
+            TimeUnit.SECONDS.sleep(seconds); // Pausa la ejecución durante los segundos especificados
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // Restaurar el estado de interrupción
+            Thread.currentThread().interrupt(); // Restaurar el estado de interrupción si se interrumpe
         }
     }
 
-    // Método para navegar a la página Product Store
+    // Navega a la página Product Store
     public void navegarAProductStore() {
         navigateTo("https://www.demoblaze.com/");
     }
 
-    // Método para hacer clic en el botón Sign up
+    // Hace clic en el botón de registro
     public void hacerClick() {
         clickElementXpath(signUpObject);
     }
 
-    // Método para ingresar credenciales aleatorias
+    // Ingresa credenciales aleatorias en los campos de registro
     public void ingresarCredenciales() {
-        // Esperar a que los campos de entrada sean visibles antes de interactuar
         WebElement userNameField = findById(userNameObject);
         WebElement passwordField = findById(passwordObject);
 
         wait.until(ExpectedConditions.visibilityOf(userNameField));
         wait.until(ExpectedConditions.visibilityOf(passwordField));
 
-        // Generar datos aleatorios para el nombre de usuario y la contraseña
-        String randomUsername = faker.name().username();
-        String randomPassword = faker.internet().password();
+        String randomUsername = faker.name().username(); // Genera un nombre de usuario aleatorio
+        String randomPassword = faker.internet().password(); // Genera una contraseña aleatoria
 
-        // Escribir los datos generados en los campos correspondientes
-        write(userNameObject, randomUsername);
-        write(passwordObject, randomPassword);
+        write(userNameObject, randomUsername); // Escribe el nombre de usuario
+        write(passwordObject, randomPassword); // Escribe la contraseña
     }
 
-    // Método para hacer clic en el botón Sign up después de ingresar credenciales
+    // Hace clic en el botón de registro después de ingresar credenciales
     public void clickSignUp() {
         clickElementXpath(afterSignUp);
     }
 
-    // Método para obtener el texto de la alerta y aceptarla
+    // Obtiene el texto de la alerta y la acepta
     public String getAlertText() {
-        return super.getAlertText(); // Llama al método de la clase base
+        return super.getAlertText(); // Devuelve el texto de la alerta
     }
 
     public void acceptAlert() {
-        super.acceptAlert(); // Llama al método de la clase base
-        pauseForSeconds(1);
+        super.acceptAlert(); // Acepta la alerta
+        pauseForSeconds(1); // Pausa para asegurar la acción
     }
 
+    // Selecciona una categoría en la tienda
     public void seleccionarCategoria(String categoria) {
-        pauseForSeconds(1); // Pausa de 1 segundo antes de interactuar
+        pauseForSeconds(1); // Pausa antes de interactuar
         clickElementXpath(String.format("//a[contains(text(),'%s')]", categoria));
     }
 
+    // Selecciona un producto en la tienda
     public void seleccionarProducto(String producto) {
-        pauseForSeconds(1); // Pausa de 1 segundo antes de interactuar
+        pauseForSeconds(1); // Pausa antes de interactuar
         clickElementXpath(String.format("//a[contains(text(),'%s')]", producto));
     }
 
+    // Hace clic en "Add to cart" para un producto
     public void clickAddToCart() {
         WebElement addToCartElement = findByXpath(addToCart);
         wait.until(ExpectedConditions.elementToBeClickable(addToCartElement));
         addToCartElement.click();
     }
 
+    // Abre la pestaña del carrito
     public void clickTabCart() {
-        pauseForSeconds(1); // Pausa de 1 segundo antes de interactuar
+        pauseForSeconds(1); // Pausa antes de interactuar
         clickElementXpath(tabCart);
     }
 
+    // Inicia el proceso de orden de compra
     public void clickPlaceOrder() {
         clickElementXpath(orden);
         pauseForSeconds(1);
     }
 
-    // acciones para orden de compra
-
+    // Ingresa información aleatoria para completar la orden de compra
     public void ingresarCredencialesOrder() {
         WebElement nameField = findByXpath(userNameOrder);
         WebElement countryField = findByXpath(countryOrder);
@@ -124,24 +122,31 @@ public class PaginaPrincipal extends BasePage {
         WebElement yearField = findByXpath(yearOrder);
 
         wait.until(ExpectedConditions.visibilityOf(nameField));
-        // // Generar datos aleatorios
-        String randomName = faker.name().firstName();
-        String randomCountry = faker.country().name();
-        String randomCity = faker.country().capital();
-        String randomCard = faker.number().digits(16);
+
+        String randomName = faker.name().firstName(); // Nombre aleatorio
+        String randomCountry = faker.country().name(); // País aleatorio
+        String randomCity = faker.country().capital(); // Ciudad aleatoria
+        String randomCard = faker.number().digits(16); // Número de tarjeta aleatorio
 
         String[] months = { "January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December" };
-        String randomMonth = months[faker.number().numberBetween(0, 12)];
+        String randomMonth = months[faker.number().numberBetween(0, 12)]; // Mes aleatorio
 
-        String year = "2024";
+        String year = "2024"; // Año fijo
 
+        //Ingresamos el texto al formuralio
         nameField.sendKeys(randomName);
         countryField.sendKeys(randomCountry);
         cityField.sendKeys(randomCity);
         cardField.sendKeys(randomCard);
         monthField.sendKeys(randomMonth);
         yearField.sendKeys(year);
+        pauseForSeconds(1); // Pausa después de ingresar datos
+    }
+
+    // Hace clic en "Purchase" para completar la compra
+    public void clickPurchase() {
+        clickElementXpath(purchase);
         pauseForSeconds(1);
     }
 }
