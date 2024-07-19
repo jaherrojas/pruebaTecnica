@@ -1,6 +1,8 @@
 package pages;
 
 import com.github.javafaker.Faker;
+import java.util.List;
+import java.util.Random;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -11,6 +13,8 @@ public class PaginaPrincipal extends BasePage {
     private String userNameObject = "sign-username";
     private String passwordObject = "sign-password";
     private String afterSignUp = "//button[contains(.,'Sign up')]";
+    
+
 
     private Faker faker;
 
@@ -60,4 +64,17 @@ public class PaginaPrincipal extends BasePage {
     public void acceptAlert() {
         super.acceptAlert(); // Llama al método de la clase base
     }
+
+     // Lista de categorías
+     private List<String> categorias = List.of("Phones", "Laptops", "Monitors");
+
+     // Método para seleccionar una categoría aleatoria
+    public String seleccionarCategoriaAleatoria() {
+        Random random = new Random();
+        String categoriaAleatoria = categorias.get(random.nextInt(categorias.size()));
+        String categoryXpath = String.format("//a[contains(text(),'%s')]", categoriaAleatoria);
+        clickElementXpath(categoryXpath);
+        return categoriaAleatoria;
+    }
+
 }

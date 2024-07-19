@@ -38,4 +38,11 @@ public class productStore extends ScenarioSteps {
         assertEquals("Sign up successful.", alertText);
         main.acceptAlert();
     }
+
+    @When("el usuario selecciona una categoria aleatoria")
+    public void seleccionarCategoriaAleatoria() {
+        String categoriaSeleccionada = main.seleccionarCategoriaAleatoria();
+        System.out.println("Categoría seleccionada: " + categoriaSeleccionada);
+    }
+
 }
