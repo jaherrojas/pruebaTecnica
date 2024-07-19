@@ -1,6 +1,9 @@
 package pages;
 
 import com.github.javafaker.Faker;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 
 public class PaginaPrincipal extends BasePage {
 
@@ -11,8 +14,8 @@ public class PaginaPrincipal extends BasePage {
 
     private Faker faker;
 
-    public PaginaPrincipal(String browser) {
-        super(browser); // Llama al constructor de la clase base con el navegador seleccionado
+    public PaginaPrincipal() {
+        super(); // Usar el constructor de la clase base sin parámetros
         this.faker = new Faker();
     }
 
@@ -28,11 +31,12 @@ public class PaginaPrincipal extends BasePage {
 
     // Método para ingresar credenciales aleatorias
     public void ingresarCredenciales() {
-        try {
-            Thread.sleep(2000); // Espera 2 segundos después de hacer clic
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // Esperar a que los campos de entrada sean visibles antes de interactuar
+        WebElement userNameField = findById(userNameObject);
+        WebElement passwordField = findById(passwordObject);
+
+        wait.until(ExpectedConditions.visibilityOf(userNameField));
+        wait.until(ExpectedConditions.visibilityOf(passwordField));
 
         // Generar datos aleatorios para el nombre de usuario y la contraseña
         String randomUsername = faker.name().username();

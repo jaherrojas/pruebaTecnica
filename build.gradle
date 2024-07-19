@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'net.serenity-bdd.serenity-gradle-plugin' version '3.9.0'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '4.1.3'
 }
 
 repositories {
@@ -26,18 +26,9 @@ dependencies {
     // Serenity dependencies
     testImplementation "net.serenity-bdd:serenity-core:4.1.20"
     testImplementation "net.serenity-bdd:serenity-junit:4.1.20"
-    testImplementation "net.serenity-bdd:serenity-cucumber:4.1.20" // Ajustado a una versión disponible
+    testImplementation "net.serenity-bdd:serenity-cucumber:4.1.20"
 
     // Additional dependencies
     implementation 'com.github.javafaker:javafaker:1.0.2'
-}
-
-tasks.named('test') {
-    useJUnitPlatform()
-    systemProperty "cucumber.options", System.getProperty("cucumber.options")
-    testLogging {
-        showStandardStreams = true
-        exceptionFormat = 'full'
-    }
 }
 

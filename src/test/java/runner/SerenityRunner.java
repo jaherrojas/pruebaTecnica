@@ -6,11 +6,15 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        plugin = {"pretty", "json:target/serenity-reports/cucumber-report.json"}, // Asegúrate de incluir los plugins necesarios
-        features = "src/test/resources/features", // Asegúrate de la ubicación correcta
-        glue = "steps"
+        plugin = {
+            "pretty", 
+            "json:target/serenity-reports/cucumber-report.json", // Reporte en formato JSON
+            "html:target/serenity-reports/cucumber-report.html"   // Reporte en formato HTML
+        },
+        features = "src/test/resources/features", // Ruta de los archivos .feature
+        glue = "steps", // Paquete con las clases de steps
+        tags = "@Caso1" // Opcional: Ejecutar solo escenarios etiquetados con @Caso1, si se aplica
 )
 public class SerenityRunner {
-    // Opcional: métodos adicionales o configuración si es necesario
+    // Puedes dejar esta clase vacía o agregar métodos adicionales si es necesario
 }
-

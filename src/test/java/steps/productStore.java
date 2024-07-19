@@ -4,30 +4,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.cucumber.java.en.*;
 import net.serenitybdd.annotations.Steps;
+import net.thucydides.core.steps.ScenarioSteps;
 import pages.PaginaPrincipal;
 
-public class productStore {
+public class productStore extends ScenarioSteps {
 
-    PaginaPrincipal main;
+    @Steps
+    private PaginaPrincipal main;
 
     @Given("que el usuario esta en la pagina principal de Product Store")
-    public void irAProdcutStore() {
-        main = new PaginaPrincipal("firefox"); // Cambiar a "firefox" para Firefox
+    public void irAProductStore() {
         main.navegarAProductStore();
     }
 
     @When("el usuario hace clic en Sign Up")
-    public void clickSignUp(){
+    public void clickSignUp() {
         main.hacerClick();
     }
 
     @And("el usuario ingresa sus credenciales")
-    public void registroCredenciales(){
+    public void registroCredenciales() {
         main.ingresarCredenciales();
     }
 
     @Then("el sistema muestra el mensaje Registro exitoso")
-    public void finalizarRegistro(){
+    public void finalizarRegistro() {
         main.clickSignUp();
 
         // Obtener el texto de la alerta y aceptarla
