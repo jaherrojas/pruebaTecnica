@@ -3,6 +3,7 @@ package steps;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.cucumber.java.en.*;
+import net.serenitybdd.annotations.Steps;
 import pages.PaginaPrincipal;
 
 public class productStore {
@@ -11,7 +12,7 @@ public class productStore {
 
     @Given("que el usuario esta en la pagina principal de Product Store")
     public void irAProdcutStore() {
-        main = new PaginaPrincipal("chrome"); // Cambiar a "firefox" para Firefox
+        main = new PaginaPrincipal("firefox"); // Cambiar a "firefox" para Firefox
         main.navegarAProductStore();
     }
 

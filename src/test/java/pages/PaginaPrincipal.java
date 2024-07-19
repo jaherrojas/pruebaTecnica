@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.By;
 import com.github.javafaker.Faker;
 
 public class PaginaPrincipal extends BasePage {
