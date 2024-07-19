@@ -1,11 +1,9 @@
 package pages;
 
 import com.github.javafaker.Faker;
-import java.util.List;
-import java.util.Random;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
+import java.util.concurrent.TimeUnit;
 
 public class PaginaPrincipal extends BasePage {
 
@@ -13,9 +11,8 @@ public class PaginaPrincipal extends BasePage {
     private String userNameObject = "sign-username";
     private String passwordObject = "sign-password";
     private String afterSignUp = "//button[contains(.,'Sign up')]";
+    private String addToCart = "//a[@href='#'][contains(.,'Add to cart')]";
     
-
-
     private Faker faker;
 
     public PaginaPrincipal() {
@@ -65,16 +62,32 @@ public class PaginaPrincipal extends BasePage {
         super.acceptAlert(); // Llama al método de la clase base
     }
 
-     // Lista de categorías
-     private List<String> categorias = List.of("Phones", "Laptops", "Monitors");
-
-     // Método para seleccionar una categoría aleatoria
-    public String seleccionarCategoriaAleatoria() {
-        Random random = new Random();
-        String categoriaAleatoria = categorias.get(random.nextInt(categorias.size()));
-        String categoryXpath = String.format("//a[contains(text(),'%s')]", categoriaAleatoria);
-        clickElementXpath(categoryXpath);
-        return categoriaAleatoria;
+    private void pauseForSeconds(int seconds) {
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Restaurar el estado de interrupción
+        }
     }
 
+    public void seleccionarCategoria(String categoria) {
+        pauseForSeconds(1); // Pausa de 2 segundos antes de interactuar
+        clickElementXpath(String.format("//a[contains(text(),'%s')]", categoria));
+    }
+
+    public void seleccionarProducto(String producto) {
+        pauseForSeconds(1); // Pausa de 2 segundos antes de interactuar
+        clickElementXpath(String.format("//a[contains(text(),'%s')]", producto));
+        pauseForSeconds(2); // Pausa de 2 segundos antes de interactuar
+    }
+
+    public void clickAddToCart() {
+        pauseForSeconds(7); 
+        WebElement addToCartElement = findByXpath(addToCart);
+        wait.until(ExpectedConditions.elementToBeClickable(addToCartElement));
+        addToCartElement.click();
+    }
+    
 }
+
+

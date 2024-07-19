@@ -39,10 +39,21 @@ public class productStore extends ScenarioSteps {
         main.acceptAlert();
     }
 
-    @When("el usuario selecciona una categoria aleatoria")
-    public void seleccionarCategoriaAleatoria() {
-        String categoriaSeleccionada = main.seleccionarCategoriaAleatoria();
-        System.out.println("Categoría seleccionada: " + categoriaSeleccionada);
+
+    @When("el usuario selecciona la categoria {string}")
+    public void seleccionarCategoria(String categoria) {
+        main.seleccionarCategoria(categoria);
     }
+
+    @And("el usuario elige el producto {string}")
+    public void seleccionarProducto(String producto) {
+        main.seleccionarProducto(producto);
+    }
+
+    @And("el usuario añade el producto al carrito")
+    public void clickAddToCart() {
+        main.clickAddToCart();
+    }
+
 
 }
